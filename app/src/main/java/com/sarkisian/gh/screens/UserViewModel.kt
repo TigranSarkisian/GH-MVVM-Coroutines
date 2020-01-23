@@ -1,32 +1,33 @@
 package com.sarkisian.gh.screens
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.sarkisian.gh.data.model.GithubUser
 import com.sarkisian.gh.data.repository.UserRepository
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 
 class UserViewModel(
     private val userRepository: UserRepository
 ) : ViewModel() {
 
+    val usersLiveData: MutableLiveData<List<GithubUser>> = MutableLiveData()
+
     init {
-        // fetchData()
+        getUsers()
     }
 
-    suspend fun getUsers(): List<GithubUser> {
-        return userRepository.getUsers()
-    }
-
-    /*private fun fetchData() {
+    private fun getUsers() {
         viewModelScope.launch {
             try {
-                _loadingState.value = LoadingState.LOADING
-                userRepository.refresh()
-                _loadingState.value = LoadingState.LOADED
-            } catch (e: Exception) {
-                _loadingState.value = LoadingState.error(e.message)
+                val users = userRepository.getUsers()
+                usersLiveData.postValue(users)
+            } catch (ex: Exception) {
+                Timber.e(ex, "Failed to fetch users!")
             }
         }
-    }*/
+    }
 
 }

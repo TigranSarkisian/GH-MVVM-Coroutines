@@ -1,11 +1,11 @@
 package com.sarkisian.gh.screens
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.sarkisian.gh.R
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 /**
  * INFO
@@ -22,12 +22,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        /*userViewModel.getUsers().observe(this, Observer {
-            // Todo: Populate the recyclerView here
-            it.forEach { githubUser ->
-                Toast.makeText(baseContext, githubUser.login, Toast.LENGTH_SHORT).show()
-            }
-        })*/
+        userViewModel.usersLiveData.observe(this, Observer {
+            Timber.i("User list: ${it.size}, first user: ${it[0].login}  ")
+        })
 
     }
 

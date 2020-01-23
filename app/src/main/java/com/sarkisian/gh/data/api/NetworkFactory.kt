@@ -38,7 +38,7 @@ object NetworkFactory {
             httpClient.addInterceptor(logging)
         }
 
-        httpClient.addNetworkInterceptor(AuthInterceptor())
+        // httpClient.addNetworkInterceptor(AuthInterceptor())
 
         return httpClient.build()
     }
