@@ -14,7 +14,7 @@ class UserViewModel(
     }
 
     suspend fun getUsers(): List<GithubUser> {
-        return userRepository.loadUsers()
+        return userRepository.getUsers()
     }
 
     /*private fun fetchData() {

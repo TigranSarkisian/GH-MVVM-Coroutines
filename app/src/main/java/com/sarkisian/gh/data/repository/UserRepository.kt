@@ -7,6 +7,6 @@ class UserRepository(
     private val gitHubAPI: GitHubAPI
 ) {
 
-    suspend fun loadUsers() = gitHubAPI.loadUsers().await()
+    suspend fun getUsers() = gitHubAPI.loadUsers()
 
 }
