@@ -22,13 +22,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         userViewModel.usersLiveData.observe(this, Observer {
-            Timber.i("User list: ${it.size}, first user: ${it[0].login}  ")
+            if (it.isNotEmpty()) {
+                Timber.i("User list: ${it.size}, first user: ${it[0].login}  ")
 
-            Toast.makeText(
-                this,
-                it[0].login,
-                Toast.LENGTH_SHORT
-            ).show()
+                Toast.makeText(
+                    this,
+                    it[0].login,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         })
 
     }
